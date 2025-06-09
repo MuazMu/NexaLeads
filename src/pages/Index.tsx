@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -117,6 +116,19 @@ const translations = {
         description: "Her hafta doğrudan kontrol panelinize teslim edilen taze müşteri adayları - gecikme yok"
       }
     },
+    form: {
+      step1: "İş Bilgileri",
+      step2: "Hedef Pazar",
+      step3: "Paketinizi Seçin",
+      businessName: "İşletme Adı",
+      email: "E-posta Adresi",
+      businessType: "İş Türü",
+      country: "Hedef Ülke",
+      city: "Hedef Şehir",
+      industry: "Hedef Sektör",
+      continue: "Devam Et",
+      submit: "Denemeyi Başlat"
+    },
     pricing: {
       title: "Büyüme Planınızı Seçin",
       starter: {
@@ -137,6 +149,35 @@ const translations = {
         leads: "Ayda 1000+ müşteri adayı",
         features: ["Pro'daki her şey", "Özel müşteri adayı gereksinimleri", "Özel hesap yöneticisi", "API erişimi"]
       }
+    },
+    testimonials: {
+      title: "500+ İşletme Tarafından Güveniliyor",
+      testimonial1: {
+        text: "NexaLeads sadece 3 ayda satışlarımızı %300 artırmamıza yardımcı oldu. Müşteri adayı kalitesi istisnai!",
+        author: "Mehmet Yılmaz",
+        company: "E-ticaret, İstanbul"
+      },
+      testimonial2: {
+        text: "Sonunda gerçekten telefonu açan müşteri adayları. Dönüşüm oranımız %2'den %15'e çıktı.",
+        author: "Ayşe Demir",
+        company: "SaaS Şirketi, Ankara"
+      },
+      testimonial3: {
+        text: "Türk pazarı müşteri adayları inanılmaz derecede doğru. İş genişlemesi için en iyi yatırım.",
+        author: "Can Özkan",
+        company: "Dijital Pazarlama Ajansı, İzmir"
+      }
+    },
+    faq: {
+      title: "Sıkça Sorulan Sorular",
+      q1: "Müşteri adaylarını nasıl doğruluyorsunuz?",
+      a1: "Her müşteri adayının doğru iletişim bilgilerine sahip olduğundan emin olmak için manuel doğrulama ve otomatik araçların bir kombinasyonunu kullanıyoruz.",
+      q2: "Memnun kalmazsam ne olur?",
+      a2: "30 günlük para iade garantisi sunuyoruz. Müşteri adayı kalitesinden memnun değilseniz, ödemenizi iade ederiz.",
+      q3: "Belirli sektörleri hedefleyebilir miyim?",
+      a3: "Evet! Hedeflemek istediğiniz tam sektörleri, işletme boyutlarını ve coğrafi konumları belirtebilirsiniz.",
+      q4: "Müşteri adaylarını ne kadar hızlı alırım?",
+      a4: "Yeni müşteri adayları haftalık olarak kontrol panelinize teslim edilir. Kayıt olduktan sonra ilk grubunuzu 48 saat içinde alacaksınız."
     }
   },
   ar: {
@@ -160,6 +201,19 @@ const translations = {
         description: "عملاء محتملون جدد يتم تسليمهم كل أسبوع مباشرة إلى لوحة التحكم - بدون تأخير"
       }
     },
+    form: {
+      step1: "معلومات العمل",
+      step2: "السوق المستهدف",
+      step3: "اختر باقتك",
+      businessName: "اسم العمل",
+      email: "عنوان البريد الإلكتروني",
+      businessType: "نوع العمل",
+      country: "البلد المستهدف",
+      city: "المدينة المستهدفة",
+      industry: "الصناعة المستهدفة",
+      continue: "متابعة",
+      submit: "ابدأ التجربة"
+    },
     pricing: {
       title: "اختر خطة نموك",
       starter: {
@@ -180,6 +234,35 @@ const translations = {
         leads: "أكثر من 1000 عميل محتمل/شهر",
         features: ["كل ما في المحترف", "متطلبات عملاء مخصصة", "مدير حساب مخصص", "وصول API"]
       }
+    },
+    testimonials: {
+      title: "موثوق من قبل أكثر من 500 شركة",
+      testimonial1: {
+        text: "ساعدتنا نيكسا ليدز في زيادة مبيعاتنا بنسبة 300% في 3 أشهر فقط. جودة العملاء المحتملين استثنائية!",
+        author: "أحمد حسن",
+        company: "وكالة التسويق الرقمي، دبي"
+      },
+      testimonial2: {
+        text: "أخيراً، عملاء محتملين يردون على الهاتف فعلاً. معدل التحويل لدينا ارتفع من 2% إلى 15%.",
+        author: "فاطمة العلي",
+        company: "شركة SaaS، الرياض"
+      },
+      testimonial3: {
+        text: "العملاء المحتملين في السوق التركي دقيقون بشكل لا يصدق. أفضل استثمار لتوسيع أعمالنا.",
+        author: "محمد النور",
+        company: "التجارة الإلكترونية، القاهرة"
+      }
+    },
+    faq: {
+      title: "الأسئلة الشائعة",
+      q1: "كيف تتحققون من العملاء المحتملين?",
+      a1: "نستخدم مزيجاً من التحقق اليدوي والأدوات الآلية لضمان أن كل عميل محتمل لديه معلومات اتصال دقيقة.",
+      q2: "ماذا لو لم أكن راضياً?",
+      a2: "نقدم ضمان استرداد الأموال لمدة 30 يوماً. إذا لم تكن راضياً عن جودة العملاء المحتملين، سنرد دفعتك.",
+      q3: "هل يمكنني استهداف صناعات محددة?",
+      a3: "نعم! يمكنك تحديد الصناعات الدقيقة وأحجام الأعمال والمواقع الجغرافية التي تريد استهدافها.",
+      q4: "كم بسرعة أتلقى العملاء المحتملين؟",
+      a4: "يتم تسليم العملاء المحتملين الجدد أسبوعياً إلى لوحة التحكم الخاصة بك. ستتلقى مجموعتك الأولى في غضون 48 ساعة من التسجيل."
     }
   }
 };
@@ -464,7 +547,7 @@ const Index = () => {
                   <>
                     <h3 className="text-lg font-semibold mb-4">{t.form.step3}</h3>
                     <div className="space-y-4">
-                      {['starter', 'pro', 'premium'].map((pkg) => (
+                      {(['starter', 'pro', 'premium'] as const).map((pkg) => (
                         <Card
                           key={pkg}
                           className={`cursor-pointer border-2 transition-all duration-300 ${
@@ -477,11 +560,11 @@ const Index = () => {
                           <CardContent className="p-4">
                             <div className="flex justify-between items-center">
                               <div>
-                                <h4 className="font-semibold">{t.pricing[pkg as keyof typeof t.pricing].name}</h4>
-                                <p className="text-sm text-gray-600">{t.pricing[pkg as keyof typeof t.pricing].leads}</p>
+                                <h4 className="font-semibold">{t.pricing[pkg].name}</h4>
+                                <p className="text-sm text-gray-600">{t.pricing[pkg].leads}</p>
                               </div>
                               <div className="text-right">
-                                <span className="text-2xl font-bold">{t.pricing[pkg as keyof typeof t.pricing].price}</span>
+                                <span className="text-2xl font-bold">{t.pricing[pkg].price}</span>
                                 <span className="text-gray-600">/month</span>
                               </div>
                             </div>
