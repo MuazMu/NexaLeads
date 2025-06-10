@@ -9,16 +9,404 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      analytics: {
+        Row: {
+          created_at: string
+          date: string
+          id: string
+          leads_contacted: number | null
+          leads_converted: number | null
+          leads_delivered: number | null
+          revenue_generated: number | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          date: string
+          id?: string
+          leads_contacted?: number | null
+          leads_converted?: number | null
+          leads_delivered?: number | null
+          revenue_generated?: number | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          date?: string
+          id?: string
+          leads_contacted?: number | null
+          leads_converted?: number | null
+          leads_delivered?: number | null
+          revenue_generated?: number | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "analytics_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      lead_requests: {
+        Row: {
+          business_type: string
+          completed_at: string | null
+          created_at: string
+          id: string
+          quantity_requested: number
+          requested_at: string
+          status: Database["public"]["Enums"]["request_status"] | null
+          target_city: string | null
+          target_country: string
+          user_id: string
+        }
+        Insert: {
+          business_type: string
+          completed_at?: string | null
+          created_at?: string
+          id?: string
+          quantity_requested: number
+          requested_at?: string
+          status?: Database["public"]["Enums"]["request_status"] | null
+          target_city?: string | null
+          target_country: string
+          user_id: string
+        }
+        Update: {
+          business_type?: string
+          completed_at?: string | null
+          created_at?: string
+          id?: string
+          quantity_requested?: number
+          requested_at?: string
+          status?: Database["public"]["Enums"]["request_status"] | null
+          target_city?: string | null
+          target_country?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lead_requests_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      leads: {
+        Row: {
+          address: string | null
+          business_name: string
+          city: string | null
+          contact_person: string | null
+          contacted: boolean | null
+          converted: boolean | null
+          country: string | null
+          created_at: string
+          delivered_at: string | null
+          email: string | null
+          id: string
+          industry: string | null
+          notes: string | null
+          phone: string | null
+          quality_score: number | null
+          rating: number | null
+          review_count: number | null
+          source: string | null
+          updated_at: string
+          user_id: string
+          website: string | null
+        }
+        Insert: {
+          address?: string | null
+          business_name: string
+          city?: string | null
+          contact_person?: string | null
+          contacted?: boolean | null
+          converted?: boolean | null
+          country?: string | null
+          created_at?: string
+          delivered_at?: string | null
+          email?: string | null
+          id?: string
+          industry?: string | null
+          notes?: string | null
+          phone?: string | null
+          quality_score?: number | null
+          rating?: number | null
+          review_count?: number | null
+          source?: string | null
+          updated_at?: string
+          user_id: string
+          website?: string | null
+        }
+        Update: {
+          address?: string | null
+          business_name?: string
+          city?: string | null
+          contact_person?: string | null
+          contacted?: boolean | null
+          converted?: boolean | null
+          country?: string | null
+          created_at?: string
+          delivered_at?: string | null
+          email?: string | null
+          id?: string
+          industry?: string | null
+          notes?: string | null
+          phone?: string | null
+          quality_score?: number | null
+          rating?: number | null
+          review_count?: number | null
+          source?: string | null
+          updated_at?: string
+          user_id?: string
+          website?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "leads_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      payments: {
+        Row: {
+          amount: number
+          created_at: string
+          currency: string | null
+          description: string | null
+          id: string
+          status: Database["public"]["Enums"]["payment_status"] | null
+          stripe_invoice_id: string | null
+          stripe_payment_id: string | null
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          currency?: string | null
+          description?: string | null
+          id?: string
+          status?: Database["public"]["Enums"]["payment_status"] | null
+          stripe_invoice_id?: string | null
+          stripe_payment_id?: string | null
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          currency?: string | null
+          description?: string | null
+          id?: string
+          status?: Database["public"]["Enums"]["payment_status"] | null
+          stripe_invoice_id?: string | null
+          stripe_payment_id?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payments_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      subscriptions: {
+        Row: {
+          amount: number
+          canceled_at: string | null
+          created_at: string
+          currency: string | null
+          current_period_end: string | null
+          current_period_start: string | null
+          id: string
+          package_type: Database["public"]["Enums"]["package_type"]
+          status:
+            | Database["public"]["Enums"]["stripe_subscription_status"]
+            | null
+          stripe_customer_id: string | null
+          stripe_subscription_id: string | null
+          trial_end: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          canceled_at?: string | null
+          created_at?: string
+          currency?: string | null
+          current_period_end?: string | null
+          current_period_start?: string | null
+          id?: string
+          package_type: Database["public"]["Enums"]["package_type"]
+          status?:
+            | Database["public"]["Enums"]["stripe_subscription_status"]
+            | null
+          stripe_customer_id?: string | null
+          stripe_subscription_id?: string | null
+          trial_end?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          canceled_at?: string | null
+          created_at?: string
+          currency?: string | null
+          current_period_end?: string | null
+          current_period_start?: string | null
+          id?: string
+          package_type?: Database["public"]["Enums"]["package_type"]
+          status?:
+            | Database["public"]["Enums"]["stripe_subscription_status"]
+            | null
+          stripe_customer_id?: string | null
+          stripe_subscription_id?: string | null
+          trial_end?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "subscriptions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      users: {
+        Row: {
+          business_type: string | null
+          city: string | null
+          country: string | null
+          created_at: string
+          email: string
+          full_name: string | null
+          id: string
+          last_login: string | null
+          monthly_value: number | null
+          package_type: Database["public"]["Enums"]["package_type"] | null
+          phone: string | null
+          subscription_status:
+            | Database["public"]["Enums"]["subscription_status"]
+            | null
+          updated_at: string
+        }
+        Insert: {
+          business_type?: string | null
+          city?: string | null
+          country?: string | null
+          created_at?: string
+          email: string
+          full_name?: string | null
+          id: string
+          last_login?: string | null
+          monthly_value?: number | null
+          package_type?: Database["public"]["Enums"]["package_type"] | null
+          phone?: string | null
+          subscription_status?:
+            | Database["public"]["Enums"]["subscription_status"]
+            | null
+          updated_at?: string
+        }
+        Update: {
+          business_type?: string | null
+          city?: string | null
+          country?: string | null
+          created_at?: string
+          email?: string
+          full_name?: string | null
+          id?: string
+          last_login?: string | null
+          monthly_value?: number | null
+          package_type?: Database["public"]["Enums"]["package_type"] | null
+          phone?: string | null
+          subscription_status?:
+            | Database["public"]["Enums"]["subscription_status"]
+            | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      calculate_conversion_rate: {
+        Args: { p_user_id: string }
+        Returns: number
+      }
+      get_leads_by_filters: {
+        Args: {
+          p_user_id: string
+          p_country?: string
+          p_city?: string
+          p_industry?: string
+          p_contacted?: boolean
+          p_converted?: boolean
+          p_limit?: number
+          p_offset?: number
+        }
+        Returns: {
+          address: string | null
+          business_name: string
+          city: string | null
+          contact_person: string | null
+          contacted: boolean | null
+          converted: boolean | null
+          country: string | null
+          created_at: string
+          delivered_at: string | null
+          email: string | null
+          id: string
+          industry: string | null
+          notes: string | null
+          phone: string | null
+          quality_score: number | null
+          rating: number | null
+          review_count: number | null
+          source: string | null
+          updated_at: string
+          user_id: string
+          website: string | null
+        }[]
+      }
+      get_user_analytics: {
+        Args: { p_user_id: string; p_start_date?: string; p_end_date?: string }
+        Returns: {
+          date: string
+          leads_delivered: number
+          leads_contacted: number
+          leads_converted: number
+          revenue_generated: number
+          conversion_rate: number
+        }[]
+      }
     }
     Enums: {
-      [_ in never]: never
+      package_type: "starter" | "pro" | "premium"
+      payment_status: "succeeded" | "failed" | "pending"
+      request_status: "pending" | "processing" | "completed"
+      stripe_subscription_status:
+        | "active"
+        | "canceled"
+        | "past_due"
+        | "incomplete"
+        | "trialing"
+      subscription_status: "active" | "inactive" | "trial"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -133,6 +521,18 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      package_type: ["starter", "pro", "premium"],
+      payment_status: ["succeeded", "failed", "pending"],
+      request_status: ["pending", "processing", "completed"],
+      stripe_subscription_status: [
+        "active",
+        "canceled",
+        "past_due",
+        "incomplete",
+        "trialing",
+      ],
+      subscription_status: ["active", "inactive", "trial"],
+    },
   },
 } as const
