@@ -6,266 +6,9 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { CheckCircle, Star, Users, TrendingUp, Clock, ChevronRight, Globe, Phone, Mail } from 'lucide-react';
+import { CheckCircle, Star, Users, TrendingUp, Clock, ChevronRight, Globe, Phone, Mail, LogIn, UserPlus } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-
-const translations = {
-  en: {
-    hero: {
-      headline: "Get 200+ Verified Local Business Leads Weekly",
-      subtext: "Stop wasting time on cold calling. Get qualified leads that actually convert in Turkey, Europe, and Arab markets.",
-      cta: "Start Free Trial"
-    },
-    benefits: {
-      title: "Why Choose NexaLeads?",
-      benefit1: {
-        title: "Verified Quality Leads",
-        description: "Every lead is manually verified with contact details, ensuring 95% accuracy rate"
-      },
-      benefit2: {
-        title: "Local Market Expertise",
-        description: "Deep understanding of Turkish, European, and Arab business cultures and preferences"
-      },
-      benefit3: {
-        title: "Weekly Delivery",
-        description: "Fresh leads delivered every week directly to your dashboard - no delays"
-      }
-    },
-    form: {
-      step1: "Business Information",
-      step2: "Target Market",
-      step3: "Choose Your Package",
-      businessName: "Business Name",
-      email: "Email Address",
-      businessType: "Business Type",
-      country: "Target Country",
-      city: "Target City",
-      industry: "Target Industry",
-      continue: "Continue",
-      submit: "Start My Trial"
-    },
-    pricing: {
-      title: "Choose Your Growth Plan",
-      starter: {
-        name: "Starter",
-        price: "€97",
-        leads: "200 leads/month",
-        features: ["Email & Phone verified", "Weekly delivery", "Basic support"]
-      },
-      pro: {
-        name: "Pro",
-        price: "€197",
-        leads: "500 leads/month",
-        features: ["Everything in Starter", "Priority support", "Advanced filters", "Export tools"]
-      },
-      premium: {
-        name: "Premium",
-        price: "€297",
-        leads: "1000+ leads/month",
-        features: ["Everything in Pro", "Custom lead requirements", "Dedicated account manager", "API access"]
-      }
-    },
-    testimonials: {
-      title: "Trusted by 500+ Businesses",
-      testimonial1: {
-        text: "NexaLeads helped us increase our sales by 300% in just 3 months. The lead quality is exceptional!",
-        author: "Ahmed Hassan",
-        company: "Digital Marketing Agency, Dubai"
-      },
-      testimonial2: {
-        text: "Finally, leads that actually pick up the phone. Our conversion rate went from 2% to 15%.",
-        author: "Maria Schmidt",
-        company: "SaaS Company, Berlin"
-      },
-      testimonial3: {
-        text: "The Turkish market leads are incredibly accurate. Best investment for our business expansion.",
-        author: "Mehmet Yılmaz",
-        company: "E-commerce, Istanbul"
-      }
-    },
-    faq: {
-      title: "Frequently Asked Questions",
-      q1: "How do you verify the leads?",
-      a1: "We use a combination of manual verification and automated tools to ensure every lead has accurate contact information.",
-      q2: "What if I'm not satisfied?",
-      a2: "We offer a 30-day money-back guarantee. If you're not happy with the lead quality, we'll refund your payment.",
-      q3: "Can I target specific industries?",
-      a3: "Yes! You can specify the exact industries, business sizes, and geographic locations you want to target.",
-      q4: "How quickly do I receive leads?",
-      a4: "New leads are delivered weekly to your dashboard. You'll receive your first batch within 48 hours of signup."
-    }
-  },
-  tr: {
-    hero: {
-      headline: "Haftalık 200+ Doğrulanmış Yerel İşletme Müşteri Adayı",
-      subtext: "Soğuk aramaya zaman kaybetmeyi bırakın. Türkiye, Avrupa ve Arap pazarlarında gerçekten dönüşüm sağlayan kalifiye müşteri adayları alın.",
-      cta: "Ücretsiz Denemeyi Başlat"
-    },
-    benefits: {
-      title: "Neden NexaLeads?",
-      benefit1: {
-        title: "Doğrulanmış Kaliteli Müşteri Adayları",
-        description: "Her müşteri adayı iletişim bilgileriyle manuel olarak doğrulanır, %95 doğruluk oranı sağlar"
-      },
-      benefit2: {
-        title: "Yerel Pazar Uzmanlığı",
-        description: "Türk, Avrupa ve Arap iş kültürleri ve tercihlerinin derinlemesine anlaşılması"
-      },
-      benefit3: {
-        title: "Haftalık Teslimat",
-        description: "Her hafta doğrudan kontrol panelinize teslim edilen taze müşteri adayları - gecikme yok"
-      }
-    },
-    form: {
-      step1: "İş Bilgileri",
-      step2: "Hedef Pazar",
-      step3: "Paketinizi Seçin",
-      businessName: "İşletme Adı",
-      email: "E-posta Adresi",
-      businessType: "İş Türü",
-      country: "Hedef Ülke",
-      city: "Hedef Şehir",
-      industry: "Hedef Sektör",
-      continue: "Devam Et",
-      submit: "Denemeyi Başlat"
-    },
-    pricing: {
-      title: "Büyüme Planınızı Seçin",
-      starter: {
-        name: "Başlangıç",
-        price: "€97",
-        leads: "Ayda 200 müşteri adayı",
-        features: ["E-posta ve telefon doğrulanmış", "Haftalık teslimat", "Temel destek"]
-      },
-      pro: {
-        name: "Pro",
-        price: "€197",
-        leads: "Ayda 500 müşteri adayı",
-        features: ["Başlangıç'taki her şey", "Öncelikli destek", "Gelişmiş filtreler", "Dışa aktarma araçları"]
-      },
-      premium: {
-        name: "Premium",
-        price: "€297",
-        leads: "Ayda 1000+ müşteri adayı",
-        features: ["Pro'daki her şey", "Özel müşteri adayı gereksinimleri", "Özel hesap yöneticisi", "API erişimi"]
-      }
-    },
-    testimonials: {
-      title: "500+ İşletme Tarafından Güveniliyor",
-      testimonial1: {
-        text: "NexaLeads sadece 3 ayda satışlarımızı %300 artırmamıza yardımcı oldu. Müşteri adayı kalitesi istisnai!",
-        author: "Mehmet Yılmaz",
-        company: "E-ticaret, İstanbul"
-      },
-      testimonial2: {
-        text: "Sonunda gerçekten telefonu açan müşteri adayları. Dönüşüm oranımız %2'den %15'e çıktı.",
-        author: "Ayşe Demir",
-        company: "SaaS Şirketi, Ankara"
-      },
-      testimonial3: {
-        text: "Türk pazarı müşteri adayları inanılmaz derecede doğru. İş genişlemesi için en iyi yatırım.",
-        author: "Can Özkan",
-        company: "Dijital Pazarlama Ajansı, İzmir"
-      }
-    },
-    faq: {
-      title: "Sıkça Sorulan Sorular",
-      q1: "Müşteri adaylarını nasıl doğruluyorsunuz?",
-      a1: "Her müşteri adayının doğru iletişim bilgilerine sahip olduğundan emin olmak için manuel doğrulama ve otomatik araçların bir kombinasyonunu kullanıyoruz.",
-      q2: "Memnun kalmazsam ne olur?",
-      a2: "30 günlük para iade garantisi sunuyoruz. Müşteri adayı kalitesinden memnun değilseniz, ödemenizi iade ederiz.",
-      q3: "Belirli sektörleri hedefleyebilir miyim?",
-      a3: "Evet! Hedeflemek istediğiniz tam sektörleri, işletme boyutlarını ve coğrafi konumları belirtebilirsiniz.",
-      q4: "Müşteri adaylarını ne kadar hızlı alırım?",
-      a4: "Yeni müşteri adayları haftalık olarak kontrol panelinize teslim edilir. Kayıt olduktan sonra ilk grubunuzu 48 saat içinde alacaksınız."
-    }
-  },
-  ar: {
-    hero: {
-      headline: "احصل على أكثر من 200 عميل محتمل محلي أسبوعياً",
-      subtext: "توقف عن إضاعة الوقت في المكالمات الباردة. احصل على عملاء محتملين مؤهلين يحققون التحويل فعلاً في الأسواق التركية والأوروبية والعربية.",
-      cta: "ابدأ التجربة المجانية"
-    },
-    benefits: {
-      title: "لماذا تختار نيكسا ليدز؟",
-      benefit1: {
-        title: "عملاء محتملون عالي الجودة ومتحققون",
-        description: "كل عميل محتمل يتم التحقق منه يدوياً مع تفاصيل الاتصال، مما يضمن معدل دقة 95%"
-      },
-      benefit2: {
-        title: "خبرة في الأسواق المحلية",
-        description: "فهم عميق للثقافات والتفضيلات التجارية التركية والأوروبية والعربية"
-      },
-      benefit3: {
-        title: "التسليم الأسبوعي",
-        description: "عملاء محتملون جدد يتم تسليمهم كل أسبوع مباشرة إلى لوحة التحكم - بدون تأخير"
-      }
-    },
-    form: {
-      step1: "معلومات العمل",
-      step2: "السوق المستهدف",
-      step3: "اختر باقتك",
-      businessName: "اسم العمل",
-      email: "عنوان البريد الإلكتروني",
-      businessType: "نوع العمل",
-      country: "البلد المستهدف",
-      city: "المدينة المستهدفة",
-      industry: "الصناعة المستهدفة",
-      continue: "متابعة",
-      submit: "ابدأ التجربة"
-    },
-    pricing: {
-      title: "اختر خطة نموك",
-      starter: {
-        name: "المبتدئ",
-        price: "€97",
-        leads: "200 عميل محتمل/شهر",
-        features: ["البريد الإلكتروني والهاتف متحققان", "التسليم الأسبوعي", "الدعم الأساسي"]
-      },
-      pro: {
-        name: "المحترف",
-        price: "€197",
-        leads: "500 عميل محتمل/شهر",
-        features: ["كل ما في المبتدئ", "الدعم ذو الأولوية", "الفلاتر المتقدمة", "أدوات التصدير"]
-      },
-      premium: {
-        name: "المتميز",
-        price: "€297",
-        leads: "أكثر من 1000 عميل محتمل/شهر",
-        features: ["كل ما في المحترف", "متطلبات عملاء مخصصة", "مدير حساب مخصص", "وصول API"]
-      }
-    },
-    testimonials: {
-      title: "موثوق من قبل أكثر من 500 شركة",
-      testimonial1: {
-        text: "ساعدتنا نيكسا ليدز في زيادة مبيعاتنا بنسبة 300% في 3 أشهر فقط. جودة العملاء المحتملين استثنائية!",
-        author: "أحمد حسن",
-        company: "وكالة التسويق الرقمي، دبي"
-      },
-      testimonial2: {
-        text: "أخيراً، عملاء محتملين يردون على الهاتف فعلاً. معدل التحويل لدينا ارتفع من 2% إلى 15%.",
-        author: "فاطمة العلي",
-        company: "شركة SaaS، الرياض"
-      },
-      testimonial3: {
-        text: "العملاء المحتملين في السوق التركي دقيقون بشكل لا يصدق. أفضل استثمار لتوسيع أعمالنا.",
-        author: "محمد النور",
-        company: "التجارة الإلكترونية، القاهرة"
-      }
-    },
-    faq: {
-      title: "الأسئلة الشائعة",
-      q1: "كيف تتحققون من العملاء المحتملين?",
-      a1: "نستخدم مزيجاً من التحقق اليدوي والأدوات الآلية لضمان أن كل عميل محتمل لديه معلومات اتصال دقيقة.",
-      q2: "ماذا لو لم أكن راضياً?",
-      a2: "نقدم ضمان استرداد الأموال لمدة 30 يوماً. إذا لم تكن راضياً عن جودة العملاء المحتملين، سنرد دفعتك.",
-      q3: "هل يمكنني استهداف صناعات محددة?",
-      a3: "نعم! يمكنك تحديد الصناعات الدقيقة وأحجام الأعمال والمواقع الجغرافية التي تريد استهدافها.",
-      q4: "كم بسرعة أتلقى العملاء المحتملين؟",
-      a4: "يتم تسليم العملاء المحتملين الجدد أسبوعياً إلى لوحة التحكم الخاصة بك. ستتلقى مجموعتك الأولى في غضون 48 ساعة من التسجيل."
-    }
-  }
-};
+import { useNavigate } from 'react-router-dom';
 
 const Index = () => {
   const [language, setLanguage] = useState<'en' | 'tr' | 'ar'>('en');
@@ -281,6 +24,271 @@ const Index = () => {
     package: ''
   });
   const { toast } = useToast();
+  const navigate = useNavigate();
+
+  const translations = {
+    en: {
+      hero: {
+        headline: "Get 200+ Verified Local Business Leads Weekly",
+        subtext: "Stop wasting time on cold calling. Get qualified leads that actually convert in Turkey, Europe, and Arab markets.",
+        cta: "Start Free Trial",
+        login: "Sign In",
+        signup: "Sign Up"
+      },
+      benefits: {
+        title: "Why Choose NexaLeads?",
+        benefit1: {
+          title: "Verified Quality Leads",
+          description: "Every lead is manually verified with contact details, ensuring 95% accuracy rate"
+        },
+        benefit2: {
+          title: "Local Market Expertise",
+          description: "Deep understanding of Turkish, European, and Arab business cultures and preferences"
+        },
+        benefit3: {
+          title: "Weekly Delivery",
+          description: "Fresh leads delivered every week directly to your dashboard - no delays"
+        }
+      },
+      form: {
+        step1: "Business Information",
+        step2: "Target Market",
+        step3: "Choose Your Package",
+        businessName: "Business Name",
+        email: "Email Address",
+        businessType: "Business Type",
+        country: "Target Country",
+        city: "Target City",
+        industry: "Target Industry",
+        continue: "Continue",
+        submit: "Start My Trial"
+      },
+      pricing: {
+        title: "Choose Your Growth Plan",
+        starter: {
+          name: "Starter",
+          price: "€97",
+          leads: "200 leads/month",
+          features: ["Email & Phone verified", "Weekly delivery", "Basic support"]
+        },
+        pro: {
+          name: "Pro",
+          price: "€197",
+          leads: "500 leads/month",
+          features: ["Everything in Starter", "Priority support", "Advanced filters", "Export tools"]
+        },
+        premium: {
+          name: "Premium",
+          price: "€297",
+          leads: "1000+ leads/month",
+          features: ["Everything in Pro", "Custom lead requirements", "Dedicated account manager", "API access"]
+        }
+      },
+      testimonials: {
+        title: "Trusted by 500+ Businesses",
+        testimonial1: {
+          text: "NexaLeads helped us increase our sales by 300% in just 3 months. The lead quality is exceptional!",
+          author: "Ahmed Hassan",
+          company: "Digital Marketing Agency, Dubai"
+        },
+        testimonial2: {
+          text: "Finally, leads that actually pick up the phone. Our conversion rate went from 2% to 15%.",
+          author: "Maria Schmidt",
+          company: "SaaS Company, Berlin"
+        },
+        testimonial3: {
+          text: "The Turkish market leads are incredibly accurate. Best investment for our business expansion.",
+          author: "Mehmet Yılmaz",
+          company: "E-commerce, Istanbul"
+        }
+      },
+      faq: {
+        title: "Frequently Asked Questions",
+        q1: "How do you verify the leads?",
+        a1: "We use a combination of manual verification and automated tools to ensure every lead has accurate contact information.",
+        q2: "What if I'm not satisfied?",
+        a2: "We offer a 30-day money-back guarantee. If you're not happy with the lead quality, we'll refund your payment.",
+        q3: "Can I target specific industries?",
+        a3: "Yes! You can specify the exact industries, business sizes, and geographic locations you want to target.",
+        q4: "How quickly do I receive leads?",
+        a4: "New leads are delivered weekly to your dashboard. You'll receive your first batch within 48 hours of signup."
+      }
+    },
+    tr: {
+      hero: {
+        headline: "Haftalık 200+ Doğrulanmış Yerel İşletme Müşteri Adayı",
+        subtext: "Soğuk aramaya zaman kaybetmeyi bırakın. Türkiye, Avrupa ve Arap pazarlarında gerçekten dönüşüm sağlayan kalifiye müşteri adayları alın.",
+        cta: "Ücretsiz Denemeyi Başlat",
+        login: "Giriş Yap",
+        signup: "Kayıt Ol"
+      },
+      benefits: {
+        title: "Neden NexaLeads?",
+        benefit1: {
+          title: "Doğrulanmış Kaliteli Müşteri Adayları",
+          description: "Her müşteri adayı iletişim bilgileriyle manuel olarak doğrulanır, %95 doğruluk oranı sağlar"
+        },
+        benefit2: {
+          title: "Yerel Pazar Uzmanlığı",
+          description: "Türk, Avrupa ve Arap iş kültürleri ve tercihlerinin derinlemesine anlaşılması"
+        },
+        benefit3: {
+          title: "Haftalık Teslimat",
+          description: "Her hafta doğrudan kontrol panelinize teslim edilen taze müşteri adayları - gecikme yok"
+        }
+      },
+      form: {
+        step1: "İş Bilgileri",
+        step2: "Hedef Pazar",
+        step3: "Paketinizi Seçin",
+        businessName: "İşletme Adı",
+        email: "E-posta Adresi",
+        businessType: "İş Türü",
+        country: "Hedef Ülke",
+        city: "Hedef Şehir",
+        industry: "Hedef Sektör",
+        continue: "Devam Et",
+        submit: "Denemeyi Başlat"
+      },
+      pricing: {
+        title: "Büyüme Planınızı Seçin",
+        starter: {
+          name: "Başlangıç",
+          price: "€97",
+          leads: "Ayda 200 müşteri adayı",
+          features: ["E-posta ve telefon doğrulanmış", "Haftalık teslimat", "Temel destek"]
+        },
+        pro: {
+          name: "Pro",
+          price: "€197",
+          leads: "Ayda 500 müşteri adayı",
+          features: ["Başlangıç'taki her şey", "Öncelikli destek", "Gelişmiş filtreler", "Dışa aktarma araçları"]
+        },
+        premium: {
+          name: "Premium",
+          price: "€297",
+          leads: "Ayda 1000+ müşteri adayı",
+          features: ["Pro'daki her şey", "Özel müşteri adayı gereksinimleri", "Özel hesap yöneticisi", "API erişimi"]
+        }
+      },
+      testimonials: {
+        title: "500+ İşletme Tarafından Güveniliyor",
+        testimonial1: {
+          text: "NexaLeads sadece 3 ayda satışlarımızı %300 artırmamıza yardımcı oldu. Müşteri adayı kalitesi istisnai!",
+          author: "Mehmet Yılmaz",
+          company: "E-ticaret, İstanbul"
+        },
+        testimonial2: {
+          text: "Sonunda gerçekten telefonu açan müşteri adayları. Dönüşüm oranımız %2'den %15'e çıktı.",
+          author: "Ayşe Demir",
+          company: "SaaS Şirketi, Ankara"
+        },
+        testimonial3: {
+          text: "Türk pazarı müşteri adayları inanılmaz derecede doğru. İş genişlemesi için en iyi yatırım.",
+          author: "Can Özkan",
+          company: "Dijital Pazarlama Ajansı, İzmir"
+        }
+      },
+      faq: {
+        title: "Sıkça Sorulan Sorular",
+        q1: "Müşteri adaylarını nasıl doğruluyorsunuz?",
+        a1: "Her müşteri adayının doğru iletişim bilgilerine sahip olduğundan emin olmak için manuel doğrulama ve otomatik araçların bir kombinasyonunu kullanıyoruz.",
+        q2: "Memnun kalmazsam ne olur?",
+        a2: "30 günlük para iade garantisi sunuyoruz. Müşteri adayı kalitesinden memnun değilseniz, ödemenizi iade ederiz.",
+        q3: "Belirli sektörleri hedefleyebilir miyim?",
+        a3: "Evet! Hedeflemek istediğiniz tam sektörleri, işletme boyutlarını ve coğrafi konumları belirtebilirsiniz.",
+        q4: "Müşteri adaylarını ne kadar hızlı alırım?",
+        a4: "Yeni müşteri adayları haftalık olarak kontrol panelinize teslim edilir. Kayıt olduktan sonra ilk grubunuzu 48 saat içinde alacaksınız."
+      }
+    },
+    ar: {
+      hero: {
+        headline: "احصل على أكثر من 200 عميل محتمل محلي أسبوعياً",
+        subtext: "توقف عن إضاعة الوقت في المكالمات الباردة. احصل على عملاء محتملين مؤهلين يحققون التحويل فعلاً في الأسواق التركية والأوروبية والعربية.",
+        cta: "ابدأ التجربة المجانية",
+        login: "تسجيل الدخول",
+        signup: "إنشاء حساب"
+      },
+      benefits: {
+        title: "لماذا تختار نيكسا ليدز؟",
+        benefit1: {
+          title: "عملاء محتملون عالي الجودة ومتحققون",
+          description: "كل عميل محتمل يتم التحقق منه يدوياً مع تفاصيل الاتصال، مما يضمن معدل دقة 95%"
+        },
+        benefit2: {
+          title: "خبرة في الأسواق المحلية",
+          description: "فهم عميق للثقافات والتفضيلات التجارية التركية والأوروبية والعربية"
+        },
+        benefit3: {
+          title: "التسليم الأسبوعي",
+          description: "عملاء محتملون جدد يتم تسليمهم كل أسبوع مباشرة إلى لوحة التحكم - بدون تأخير"
+        }
+      },
+      form: {
+        step1: "معلومات العمل",
+        step2: "السوق المستهدف",
+        step3: "اختر باقتك",
+        businessName: "اسم العمل",
+        email: "عنوان البريد الإلكتروني",
+        businessType: "نوع العمل",
+        country: "البلد المستهدف",
+        city: "المدينة المستهدفة",
+        industry: "الصناعة المستهدفة",
+        continue: "متابعة",
+        submit: "ابدأ التجربة"
+      },
+      pricing: {
+        title: "اختر خطة نموك",
+        starter: {
+          name: "المبتدئ",
+          price: "€97",
+          leads: "200 عميل محتمل/شهر",
+          features: ["البريد الإلكتروني والهاتف متحققان", "التسليم الأسبوعي", "الدعم الأساسي"]
+        },
+        pro: {
+          name: "المحترف",
+          price: "€197",
+          leads: "500 عميل محتمل/شهر",
+          features: ["كل ما في المبتدئ", "الدعم ذو الأولوية", "الفلاتر المتقدمة", "أدوات التصدير"]
+        },
+        premium: {
+          name: "المتميز",
+          price: "€297",
+          leads: "أكثر من 1000 عميل محتمل/شهر",
+          features: ["كل ما في المحترف", "متطلبات عملاء مخصصة", "مدير حساب مخصص", "وصول API"]
+        }
+      },
+      testimonials: {
+        title: "موثوق من قبل أكثر من 500 شركة",
+        testimonial1: {
+          text: "ساعدتنا نيكسا ليدز في زيادة مبيعاتنا بنسبة 300% في 3 أشهر فقط. جودة العملاء المحتملين استثنائية!",
+          author: "أحمد حسن",
+          company: "وكالة التسويق الرقمي، دبي"
+        },
+        testimonial2: {
+          text: "أخيراً، عملاء محتملين يردون على الهاتف فعلاً. معدل التحويل لدينا ارتفع من 2% إلى 15%.",
+          author: "فاطمة العلي",
+          company: "شركة SaaS، الرياض"
+        },
+        testimonial3: {
+          text: "العملاء المحتملين في السوق التركي دقيقون بشكل لا يصدق. أفضل استثمار لتوسيع أعمالنا.",
+          author: "محمد النور",
+          company: "التجارة الإلكترونية، القاهرة"
+        }
+      },
+      faq: {
+        title: "الأسئلة الشائعة",
+        q1: "كيف تتحققون من العملاء المحتملين?",
+        a1: "نستخدم مزيجاً من التحقق اليدوي والأدوات الآلية لضمان أن كل عميل محتمل لديه معلومات اتصال دقيقة.",
+        q2: "ماذا لو لم أكن راضياً?",
+        a2: "نقدم ضمان استرداد الأموال لمدة 30 يوماً. إذا لم تكن راضياً عن جودة العملاء المحتملين، سنرد دفعتك.",
+        q3: "هل يمكنني استهداف صناعات محددة?",
+        a3: "نعم! يمكنك تحديد الصناعات الدقيقة وأحجام الأعمال والمواقع الجغرافية التي تريد استهدافها.",
+        q4: "كم بسرعة أتلقى العملاء المحتملين؟",
+        a4: "يتم تسليم العملاء المحتملين الجدد أسبوعياً إلى لوحة التحكم الخاصة بك. ستتلقى مجموعتك الأولى في غضون 48 ساعة من التسجيل."
+      }
+    }
+  };
 
   const t = translations[language];
   const isRTL = language === 'ar';
@@ -313,6 +321,14 @@ const Index = () => {
     }
   };
 
+  const handleSignIn = () => {
+    navigate('/auth');
+  };
+
+  const handleSignUp = () => {
+    navigate('/pricing');
+  };
+
   const LanguageSwitcher = () => (
     <div className="flex gap-2">
       {(['en', 'tr', 'ar'] as const).map((lang) => (
@@ -342,7 +358,19 @@ const Index = () => {
               NexaLeads
             </span>
           </div>
-          <LanguageSwitcher />
+          <div className="flex items-center gap-4">
+            <LanguageSwitcher />
+            <div className="flex gap-2">
+              <Button variant="outline" onClick={handleSignIn}>
+                <LogIn className="w-4 h-4 mr-2" />
+                {t.hero.login}
+              </Button>
+              <Button onClick={handleSignUp}>
+                <UserPlus className="w-4 h-4 mr-2" />
+                {t.hero.signup}
+              </Button>
+            </div>
+          </div>
         </div>
       </header>
 
@@ -363,7 +391,7 @@ const Index = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-            <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-lg px-8 py-6">
+            <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-lg px-8 py-6" onClick={handleSignUp}>
               {t.hero.cta}
               <ChevronRight className="ml-2 w-5 h-5" />
             </Button>
@@ -772,3 +800,5 @@ const Index = () => {
 };
 
 export default Index;
+
+</edits_to_apply>
