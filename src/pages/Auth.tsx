@@ -49,8 +49,10 @@ export default function Auth() {
       } else {
         toast({
           title: "Success!",
-          description: "Please check your email to confirm your account.",
+          description: "Account created successfully. Redirecting to dashboard...",
         });
+        // Redirect immediately to dashboard
+        navigate('/dashboard');
       }
     } catch (error) {
       toast({

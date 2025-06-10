@@ -61,15 +61,15 @@ serve(async (req) => {
       logStep("Created new customer", { customerId });
     }
 
-    // Define pricing based on plan and currency
+    // Define pricing based on plan (only EUR)
     const pricing = {
-      starter: { EUR: 9700, USD: 10400, TRY: 32000 },
-      pro: { EUR: 19700, USD: 21200, TRY: 65000 },
-      premium: { EUR: 29700, USD: 31900, TRY: 98000 }
+      starter: { EUR: 9700 },
+      pro: { EUR: 19700 },
+      premium: { EUR: 29700 }
     };
 
-    const amount = pricing[plan as keyof typeof pricing]?.[currency as keyof typeof pricing.starter];
-    if (!amount) throw new Error(`Invalid plan or currency: ${plan}, ${currency}`);
+    const amount = pricing[plan as keyof typeof pricing]?.EUR;
+    if (!amount) throw new Error(`Invalid plan: ${plan}`);
 
     const origin = req.headers.get("origin") || "http://localhost:3000";
     const session = await stripe.checkout.sessions.create({
@@ -77,7 +77,7 @@ serve(async (req) => {
       line_items: [
         {
           price_data: {
-            currency: currency.toLowerCase(),
+            currency: "eur",
             product_data: {
               name: `NexaLeads ${plan.charAt(0).toUpperCase() + plan.slice(1)} Plan`,
               description: `Monthly subscription to NexaLeads ${plan} plan`
@@ -94,7 +94,7 @@ serve(async (req) => {
       metadata: {
         user_id: user.id,
         plan: plan,
-        currency: currency
+        currency: "EUR"
       },
       subscription_data: {
         trial_period_days: 7,

@@ -326,7 +326,7 @@ const Index = () => {
   };
 
   const handleSignUp = () => {
-    navigate('/pricing');
+    navigate('/auth');
   };
 
   const LanguageSwitcher = () => (
@@ -800,3 +800,5 @@ const Index = () => {
 };
 
 export default Index;
+
+</initial_code>

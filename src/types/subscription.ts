@@ -4,8 +4,6 @@ export interface PricingPlan {
   name: string;
   price: {
     EUR: number;
-    USD: number;
-    TRY: number;
   };
   features: string[];
   popular?: boolean;
@@ -32,7 +30,7 @@ export interface PaymentHistory {
 }
 
 export interface Currency {
-  code: 'EUR' | 'USD' | 'TRY';
+  code: 'EUR';
   symbol: string;
   name: string;
 }

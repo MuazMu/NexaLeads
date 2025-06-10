@@ -4,22 +4,20 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { PricingCard } from "@/components/pricing/PricingCard";
-import { CurrencySelector } from "@/components/pricing/CurrencySelector";
+import { AuthenticatedNavbar } from "@/components/shared/AuthenticatedNavbar";
 import { supabase } from "@/integrations/supabase/client";
 import { PricingPlan, Currency, SubscriptionStatus } from "@/types/subscription";
 import { useToast } from "@/hooks/use-toast";
 
 const currencies: Currency[] = [
   { code: 'EUR', symbol: '€', name: 'Euro' },
-  { code: 'USD', symbol: '$', name: 'US Dollar' },
-  { code: 'TRY', symbol: '₺', name: 'Turkish Lira' },
 ];
 
 const plans: PricingPlan[] = [
   {
     id: 'starter',
     name: 'Starter',
-    price: { EUR: 9700, USD: 10400, TRY: 32000 },
+    price: { EUR: 9700 },
     leads: 500,
     countries: 5,
     support: 'Email support',
@@ -34,7 +32,7 @@ const plans: PricingPlan[] = [
   {
     id: 'pro',
     name: 'Pro',
-    price: { EUR: 19700, USD: 21200, TRY: 65000 },
+    price: { EUR: 19700 },
     leads: 2000,
     countries: 15,
     support: 'Priority support',
@@ -52,7 +50,7 @@ const plans: PricingPlan[] = [
   {
     id: 'premium',
     name: 'Premium',
-    price: { EUR: 29700, USD: 31900, TRY: 98000 },
+    price: { EUR: 29700 },
     leads: 5000,
     countries: 50,
     support: '24/7 phone & email',
@@ -70,14 +68,16 @@ const plans: PricingPlan[] = [
 ];
 
 export default function Pricing() {
-  const [selectedCurrency, setSelectedCurrency] = useState<Currency>(currencies[0]);
+  const [selectedCurrency] = useState<Currency>(currencies[0]);
   const [isLoading, setIsLoading] = useState(false);
   const [subscription, setSubscription] = useState<SubscriptionStatus | null>(null);
+  const [user, setUser] = useState<any>(null);
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const { toast } = useToast();
 
   useEffect(() => {
+    checkUser();
     checkSubscription();
     
     // Handle canceled payment
@@ -89,6 +89,11 @@ export default function Pricing() {
       });
     }
   }, [searchParams]);
+
+  const checkUser = async () => {
+    const { data: { user } } = await supabase.auth.getUser();
+    setUser(user);
+  };
 
   const checkSubscription = async () => {
     try {
@@ -118,7 +123,7 @@ export default function Pricing() {
           description: "Please sign in to subscribe to a plan.",
           variant: "destructive",
         });
-        navigate('/');
+        navigate('/auth');
         return;
       }
 
@@ -152,19 +157,13 @@ export default function Pricing() {
 
   return (
     <div className="min-h-screen bg-background">
+      {user && <AuthenticatedNavbar />}
       <div className="container mx-auto px-4 py-16">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold mb-4">Choose Your Plan</h1>
           <p className="text-xl text-muted-foreground mb-8">
             Get access to qualified leads and grow your business
           </p>
-          <div className="flex justify-center">
-            <CurrencySelector
-              currencies={currencies}
-              selectedCurrency={selectedCurrency}
-              onCurrencyChange={setSelectedCurrency}
-            />
-          </div>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">

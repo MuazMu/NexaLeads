@@ -9,6 +9,16 @@ interface CurrencySelectorProps {
 }
 
 export function CurrencySelector({ currencies, selectedCurrency, onCurrencyChange }: CurrencySelectorProps) {
+  // Since we only have EUR now, we can hide this component or show it as read-only
+  if (currencies.length <= 1) {
+    return (
+      <div className="flex items-center space-x-2">
+        <span className="text-sm font-medium">Currency:</span>
+        <span className="text-sm font-semibold">{selectedCurrency.symbol} {selectedCurrency.code}</span>
+      </div>
+    );
+  }
+
   return (
     <div className="flex items-center space-x-2">
       <span className="text-sm font-medium">Currency:</span>
