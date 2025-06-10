@@ -1,106 +1,83 @@
 
-import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import React from 'react';
 import { Button } from '@/components/ui/button';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { TrendingUp, LogOut, User, CreditCard, DollarSign } from 'lucide-react';
+import { TrendingUp, User, LogOut } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 
 export const AuthenticatedNavbar = () => {
   const navigate = useNavigate();
-  const location = useLocation();
   const { toast } = useToast();
-  const [user, setUser] = useState<any>(null);
 
-  useEffect(() => {
-    const getUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      setUser(user);
-    };
-    getUser();
-  }, []);
-
-  const handleSignOut = async () => {
-    const { error } = await supabase.auth.signOut();
-    if (error) {
+  const handleLogout = async () => {
+    try {
+      await supabase.auth.signOut();
+      toast({
+        title: "Signed out",
+        description: "You have been successfully signed out.",
+      });
+      navigate('/');
+    } catch (error) {
       toast({
         title: "Error",
         description: "Failed to sign out. Please try again.",
-        variant: "destructive"
+        variant: "destructive",
       });
-    } else {
-      toast({
-        title: "Signed out successfully",
-        description: "You have been signed out.",
-      });
-      navigate('/');
     }
   };
 
-  const isActive = (path: string) => location.pathname === path;
+  const handleLogoClick = () => {
+    navigate('/');
+  };
 
   return (
-    <nav className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
+    <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-        <div className="flex items-center gap-8">
-          <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/dashboard')}>
-            <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-              <TrendingUp className="w-5 h-5 text-white" />
-            </div>
-            <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              NexaLeads
-            </span>
+        <div className="flex items-center gap-2 cursor-pointer" onClick={handleLogoClick}>
+          <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+            <TrendingUp className="w-5 h-5 text-white" />
           </div>
-          
-          <div className="flex gap-1">
-            <Button 
-              variant={isActive('/dashboard') ? "default" : "ghost"}
-              onClick={() => navigate('/dashboard')}
-            >
-              Dashboard
-            </Button>
-            <Button 
-              variant={isActive('/billing') ? "default" : "ghost"}
-              onClick={() => navigate('/billing')}
-            >
-              <CreditCard className="w-4 h-4 mr-2" />
-              Billing
-            </Button>
-            <Button 
-              variant={isActive('/pricing') ? "default" : "ghost"}
-              onClick={() => navigate('/pricing')}
-            >
-              <DollarSign className="w-4 h-4 mr-2" />
-              Pricing
-            </Button>
-          </div>
+          <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            NexaLeads
+          </span>
         </div>
+        
+        <nav className="hidden md:flex items-center space-x-6">
+          <Button 
+            variant="ghost" 
+            onClick={() => navigate('/dashboard')}
+            className="text-gray-600 hover:text-gray-900"
+          >
+            Dashboard
+          </Button>
+          <Button 
+            variant="ghost" 
+            onClick={() => navigate('/billing')}
+            className="text-gray-600 hover:text-gray-900"
+          >
+            Billing
+          </Button>
+          <Button 
+            variant="ghost" 
+            onClick={() => navigate('/pricing')}
+            className="text-gray-600 hover:text-gray-900"
+          >
+            Pricing
+          </Button>
+        </nav>
 
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-              <Avatar className="h-8 w-8">
-                <AvatarImage src="/placeholder.svg" alt={user?.email || "User"} />
-                <AvatarFallback>
-                  {user?.email?.charAt(0).toUpperCase() || "U"}
-                </AvatarFallback>
-              </Avatar>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-56" align="end" forceMount>
-            <DropdownMenuItem className="flex items-center">
-              <User className="mr-2 h-4 w-4" />
-              <span>{user?.email}</span>
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={handleSignOut}>
-              <LogOut className="mr-2 h-4 w-4" />
-              <span>Sign out</span>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <div className="flex items-center gap-4">
+          <Button variant="outline" size="sm">
+            <User className="w-4 h-4 mr-2" />
+            Account
+          </Button>
+          <Button variant="outline" size="sm" onClick={handleLogout}>
+            <LogOut className="w-4 h-4 mr-2" />
+            Sign Out
+          </Button>
+        </div>
       </div>
-    </nav>
+    </header>
   );
 };

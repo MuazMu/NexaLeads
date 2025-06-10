@@ -15,7 +15,8 @@ export default function Auth() {
   const [signUpData, setSignUpData] = useState({
     email: '',
     password: '',
-    fullName: ''
+    fullName: '',
+    username: ''
   });
   const [signInData, setSignInData] = useState({
     email: '',
@@ -34,9 +35,9 @@ export default function Auth() {
         password: signUpData.password,
         options: {
           data: {
-            full_name: signUpData.fullName
-          },
-          emailRedirectTo: `${window.location.origin}/dashboard`
+            full_name: signUpData.fullName,
+            username: signUpData.username
+          }
         }
       });
 
@@ -51,7 +52,6 @@ export default function Auth() {
           title: "Success!",
           description: "Account created successfully. Redirecting to dashboard...",
         });
-        // Redirect immediately to dashboard
         navigate('/dashboard');
       }
     } catch (error) {
@@ -198,6 +198,22 @@ export default function Auth() {
                         className="pl-10"
                         value={signUpData.fullName}
                         onChange={(e) => setSignUpData({...signUpData, fullName: e.target.value})}
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="signup-username">Username</Label>
+                    <div className="relative">
+                      <User className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                      <Input
+                        id="signup-username"
+                        type="text"
+                        placeholder="Choose a username"
+                        className="pl-10"
+                        value={signUpData.username}
+                        onChange={(e) => setSignUpData({...signUpData, username: e.target.value})}
                         required
                       />
                     </div>
